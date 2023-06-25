@@ -1,0 +1,21 @@
+{
+    "launch_options": {
+        "instance_type_name": null,
+        "region_name": null,
+        "ssh_key_names": [
+            "WSL"
+        ],
+        "file_system_names": [],
+        "quantity": 1
+    },
+    "copy": [
+        [
+            "./setup.py",
+            "/tmp/"
+        ]
+    ],
+    "commands": [
+        "cat '/tmp/setup.py'",
+        "sleep 30"
+    ]
+}
