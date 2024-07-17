@@ -45,6 +45,7 @@ def construct_payload(config):
 
 def get_instance_info(launch_instance_response):
     instance_id = launch_instance_response.json()["data"]["instance_ids"][0]
+    start_time = time.time()
     logging.info("Waiting for instance to become active...")
     while True:
         response = get_instance(instance_id)
@@ -53,7 +54,7 @@ def get_instance_info(launch_instance_response):
             logging.info("Instance is active")
             break
         else:
-            logging.info(f"Instance status: {status}")
+            logging.info(f"[%d sec] Instance status: {status}", int(time.time()-start_time))
         time.sleep(5)  # wait for 5 seconds before making another request
     host = response.json()["data"]["ip"]
     instance_info = {
@@ -64,9 +65,11 @@ def get_instance_info(launch_instance_response):
 
 
 def launch_instance(config):
-    payload = construct_payload(config["launch_options"])
+    launch_options_config = config["launch_options"]
+    payload = construct_payload(launch_options_config)
     response = launch_instance_call(payload)
     instance_info = get_instance_info(response)
+    instance_info["local_ssh_key"] = launch_options_config.get("local_ssh_key")
     return instance_info
 
 

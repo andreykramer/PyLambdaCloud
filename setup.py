@@ -8,6 +8,6 @@ setup(
     description="Basic interface for launching tasks on Lambda Cloud instances using python.",
     author="Andrey Kramer",
     packages=find_packages(),
-    install_requires=["requests", "inquirer", "fabric", "patchwork"],
+    install_requires=["requests", "inquirer", "fabric"],
     tests_require=["pytest"],
 )

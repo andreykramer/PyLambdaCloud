@@ -74,8 +74,6 @@ Before using PyLambdaCloud, you'll need to set up your Lambda Cloud account:
     
     ubuntu@[IP]:~$ client_loop: send disconnect: Broken pipe
     ```
-   
-   **NOTE**: When the SSH connection is being established, you will be prompted by your system to add the host to the `known_hosts` file, write yes and press enter.
 
 ## Configuration Format
 
@@ -90,7 +88,8 @@ The PyLambdaCloud package uses a JSON configuration file to define the tasks to 
             "WSL"
         ],
         "file_system_names": [],
-        "quantity": 1
+        "quantity": 1,
+        "local_ssh_key": null
     },
     "copy": [
         [
@@ -111,6 +110,7 @@ The PyLambdaCloud package uses a JSON configuration file to define the tasks to 
     - `ssh_key_names`: An array of names of SSH keys to be used for the instances.
     - `file_system_names`: An array of names of file systems to be used for the instances.
     - `quantity`: The number of instances to be launched. Currently only 1 is supported.
+    - `local_ssh_key`: The full path to the private key that matches one of uploaded in `ssh_key_names`. If specified: only the specified private key is being used, no attempts to use every key from ~/.ssh directory.
 
 - `copy`: An array of arrays, where each inner array represents a pair of source and destination paths for file transfer operations.
 

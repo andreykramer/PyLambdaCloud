@@ -3,3 +3,5 @@
 *.egg
 .pytest_cache/
 __pycache__/
+build/
+env/

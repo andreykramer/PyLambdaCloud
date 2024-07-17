@@ -9,6 +9,8 @@ URL_BASE = "https://cloud.lambdalabs.com/api/v1/"
 def api_get(endpoint):
     # Base API get request
     response = requests.get(URL_BASE + endpoint, auth=(API_KEY, ""))
+    if response.status_code == 401:
+        raise(EnvironmentError("Invalid API token. Check LAMBDA_CLOUD_API_KEY env"))
     return response
 
 
@@ -20,6 +22,8 @@ def api_post(endpoint, payload):
         headers={"Content-Type": "application/json"},
         data=json.dumps(payload),
     )
+    if response.status_code == 401:
+        raise(EnvironmentError("Invalid API token. Check LAMBDA_CLOUD_API_KEY env"))
     return response
 
 
